@@ -24,19 +24,17 @@ El sistema consta de dos módulos principales:
 ## Equipo de desarrollo
 | Nombre | Rol |
 |--------|-----|
-| Lanfranco Darel Caballero | Developer |
 | Tomás Agustín Huespe | Developer |
-| Gonzalo Nicolás Quiroga | Developer |
 | Ángel Nicolás Rivero | Developer |
 | Verónica Analía Gagliardi | Developer |
 | Tobias Molina | Developer |
-| Gonzalo Nicolás Quiroga | Product Owner |
-| Lanfranco Darel Caballero | Scrum Master |
+| Gonzalo Nicolás Quiroga | Product Owner/Developer |
+| Lanfranco Darel Caballero | Scrum Master/Developer |
 
 ---
 
 ## Tecnologías
-- Lenguajes/herramientas: Wordpress inc, XAMPP, Docker (A definir ...)
+- Lenguajes/herramientas: Wordpress, XAMPP, Docker, LAMP
 - Base de datos: MariaDB  
 - Control de versiones: GitHub  
 
