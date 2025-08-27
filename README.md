@@ -1,46 +1,4 @@
-# LogistiCom
+# NO MERGEAR ESTE BRANCH BAJO NINGUN MOTIVO
 
-**Sistema de Gestión de Comisiones de Paquetería** – Aplicación Multiplataforma
-
----
-
-## Descripción
-LogistiCom es un sistema diseñado para empresas que trabajan con comisiones de paquetería.  
-Permite:
-
-- Visualizar de manera clara y organizada los datos de cada comisión.
-- Administrar cuentas de usuarios y conductores.
-- Registrar y gestionar vehículos y mantenimientos.
-- Controlar ingresos y egresos, así como carteras y cuentas asociadas.
-- Registrar, modificar y eliminar viajes y comisiones desde la app multiplataforma.
-
-El sistema consta de dos módulos principales:
-
-1. **Web App – Administración:** Panel central para supervisión y gestión.
-2. **App Multiplataforma – Conductores:** Registro de viajes y visualización de comisiones.
-
----
-
-## Equipo de desarrollo
-| Nombre | Rol |
-|--------|-----|
-| Tomás Agustín Huespe | Developer |
-| Ángel Nicolás Rivero | Developer |
-| Verónica Analía Gagliardi | Developer |
-| Tobias Molina | Developer |
-| Gonzalo Nicolás Quiroga | Product Owner/Developer |
-| Lanfranco Darel Caballero | Scrum Master/Developer |
-
----
-
-## Tecnologías
-- Lenguajes/herramientas: Wordpress, XAMPP, Docker, LAMP
-- Base de datos: MariaDB  
-- Control de versiones: GitHub  
-
----
-
-## Instalación
-1. Clonar el repositorio:
-```bash
-git clone https://github.com/devcordoba/logisticom-2do-cuatrimestre
+Si ves este mensaje, seguramente lo arruinaste y/o mergeaste este branch a otro por error, en cuyo caso debés revertir estos cambios ya que no son aptos para ser mergeados.
+Todo lo que ves acá es tentativo de ser incluido en los siguientes sprints(de ahí sprint X)
