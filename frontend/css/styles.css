@@ -1,0 +1,101 @@
+/* Estilos genéricos para todas las páginas */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --main-color: #fff;
+    --alt-color: #bbb;
+    --error-color: #ff1010;
+    --error-bg-color: #ffe8e8;
+}
+
+body {
+    background-color: var(--main-color);
+}
+
+button {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Pie de página */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-around;
+
+    background-color: var(--alt-color);
+    padding: 1em;
+}
+
+/* Reglas de estilización personalizables */
+/* Para login.html */
+.login-container {
+    background-color: var(--alt-color);
+    width: 50vh;
+    height: 50%;
+
+    margin: auto;
+    margin-top: 25vh;
+    padding-top: 4em;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+}
+
+.header {
+    text-align: center;
+    margin: 1em;
+}
+
+.login-form {
+    padding: 1em;
+    width: 100%;
+}
+
+.login-aviso {
+   text-align: center;
+   background-color: var(--error-bg-color);
+   width: 75%;
+   padding: 0.7em;
+
+   border-radius: 8px;
+   box-shadow: 0 0 6px 4px var(--error-color);
+}
+
+.login-form > form {
+    display: flex;
+    flex-direction: column;
+
+    margin: 1em;
+}
+
+.login-form form > label {
+    padding-top: 1em;
+    text-align: center;
+}
+
+.login-form form > button {
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    padding: 0.25em 1.25em;
+
+    width: max-content;
+}
