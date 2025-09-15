@@ -1,48 +1,141 @@
 # LogistiCom
 
-**Sistema de Gestión de Comisiones de Paquetería** – Aplicación Multiplataforma
+---
+
+# LogistiCom - Sistema de Gestión de Comisiones
+
+Sistema simple de gestion de comisiones hecho en Python con MySQL.
+
+## Descripción
+
+**LogistiCom** es un sistema de gestión orientado a empresas que trabajan exclusivamente con comisiones de paquetería.  
+El objetivo principal del sistema es permitir la visualización clara y organizada de los datos relacionados a cada comisión, incluyendo:
+
+- Fechas de inicio y entrega
+- Cantidad de paquetes
+- Montos asociados
+- Direcciones de origen y destino
+- Estado de la comisión (en curso, entregado, etc.)
+- Vehículo utilizado
+
+El sistema busca facilitar la administración diaria, la trazabilidad de envíos y el control financiero básico de la empresa.
+
+## ✔️ Funcionalidades agregadas / ❌ Funcionalidades planeadas o que están en progreso
+
+✔️​​ Registro y Login con autenticación de usuarios
+
+✔️ Gestión de Usuarios
+
+✔️ Gestión de Comisiones o pedidos
+
+❌ Gestión de Viajes
+
+❌ Dashboard con indicadores clave
+
+❌ Gestión de Vehículos y Mantenimiento
+
+❌ Visualización de Carteras (ingresos y egresos)
+
+❌ Notificaciones internas
+
+❌ Adaptado como Web App (uso optimizado desde dispositivos móviles)
+
+## Usuarios
+
+- **Administradores:** responsables de gestionar y supervisar las comisiones, viajes, y finanzas de la empresa.
+- **Usuarios:** encargados de realizar las comisiones y consultar sus asignaciones desde el sistema.
 
 ---
 
-## Descripción
-LogistiCom es un sistema diseñado para empresas que trabajan con comisiones de paquetería.  
-Permite:
+## Como usar
 
-- Visualizar de manera clara y organizada los datos de cada comisión.
-- Administrar cuentas de usuarios y conductores.
-- Registrar y gestionar vehículos y mantenimientos.
-- Controlar ingresos y egresos, así como carteras y cuentas asociadas.
-- Registrar, modificar y eliminar viajes y comisiones desde la app multiplataforma.
+1. Instalar dependencias:
+```bash
+pip install -r requirements.txt
+```
 
-El sistema consta de dos módulos principales:
+2. Crear la base de datos:
+- Ejecutar el archivo proyecto_db.sql en MySQL
 
-1. **Web App – Administración:** Panel central para supervisión y gestión.
-2. **App Multiplataforma – Conductores:** Registro de viajes y visualización de comisiones.
+3. Ejecutar el programa:
+```bash
+python main.py
+```
+
+## Usuarios de prueba
+
+- Admin: admin@abc.com / admin123
+- Usuario: juan@abc.com / user123
+
+---
+
+## Funciones
+
+### Usuario normal:
+- Ver sus datos
+- Cambiar nombre y contraseña
+- Ingresar comisiones
+- Ver sus comisiones
+
+### Admin:
+- Todo lo anterior
+- Ver todos los usuarios
+- Cambiar roles
+- Eliminar usuarios
+- Ver todas las comisiones
+- Despachar comisiones
+
+---
+
+## Archivos
+
+### Backend
+
+- main.py - programa principal
+- models/ - clases de usuario, login y comision
+- database/ - conexion a MySQL
+- menu/ - menus del sistema
+- utils/ - validaciones
+- proyecto_db.sql - script de base de datos
+
+### Documentación
+
+- Diagrama de clases
+- Diagrama DER
+- Documento IEEE 830
+
+### Frontend
+
+- css/ - directorio con estilos para HTML
+- img/ - imagenes
+- js/ - JavaScript
+- *.html - archivos varios de paginas web de logisticom
 
 ---
 
 ## Equipo de desarrollo
 | Nombre | Rol |
 |--------|-----|
-| Lanfranco Darel Caballero | Developer |
 | Tomás Agustín Huespe | Developer |
-| Gonzalo Nicolás Quiroga | Developer |
 | Ángel Nicolás Rivero | Developer |
 | Verónica Analía Gagliardi | Developer |
 | Tobias Molina | Developer |
-| Gonzalo Nicolás Quiroga | Product Owner |
-| Lanfranco Darel Caballero | Scrum Master |
+| Gonzalo Nicolás Quiroga | Product Owner/Developer |
+| Lanfranco Darel Caballero | Scrum Master/Developer |
 
 ---
 
 ## Tecnologías
-- Lenguajes/herramientas: Wordpress inc, XAMPP, Docker (A definir ...)
-- Base de datos: MariaDB  
+- Lenguajes/herramientas: XAMPP, Docker, LAMP
+- Base de datos: MySQL 
 - Control de versiones: GitHub  
 
 ---
 
-## Instalación
-1. Clonar el repositorio:
-```bash
-git clone https://github.com/devcordoba/logisticom-2do-cuatrimestre
+## Estado del Proyecto
+
+🟡 El proyecto se encuentra en la etapa de desarrollo/sprint 1, véase la rama `develop` para ver los cambios 
+
+## Materia
+
+Este proyecto fue desarrollado como parte de la materia **Iniciación a la programación y base de datos** de la carrera **Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales**.
