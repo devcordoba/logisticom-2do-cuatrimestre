@@ -1,61 +1,77 @@
 import datetime
 from models.usuario import Usuario
+from database.conexion import ConexionBaseDatos
 
 class Comision:
-    _comisiones = []
-    _ultimo_id_comision = 0
+    def ingresar_comision(id_usuario, descripcion):
+        conexion_db = ConexionBaseDatos()
+        if not conexion_db.conectar():
+            return False
+        
+        fecha_actual = datetime.date.today()
+        
+        consulta = "INSERT INTO comisiones (id_usuario, descripcion, estado, fecha) VALUES (%s, %s, 'Pendiente', %s)"
+        
+        if conexion_db.ejecutar_consulta(consulta, (id_usuario, descripcion, fecha_actual)):
+            conexion_db.desconectar()
+            return True
+        else:
+            conexion_db.desconectar()
+            return False
 
-    @classmethod
-    def ingresar_comision(cls, id_usuario, descripcion):
-        cls._ultimo_id_comision += 1
-        comision = {
-            'id_comision': cls._ultimo_id_comision,
-            'id_usuario': id_usuario,
-            'fecha': datetime.datetime.now(),
-            'estado': 'Pendiente',
-            'descripcion': descripcion
-        }
-        cls._comisiones.append(comision)
-        return True
-
-    @classmethod
-    def listar_comisiones_usuario(cls, id_usuario):
-        comisiones_usuario = [p for p in cls._comisiones if p['id_usuario'] == id_usuario]
-        resultado = []
-        for p in comisiones_usuario:
-            usuario = Usuario.obtener_por_id(p['id_usuario'])
-            resultado.append({
-                'id_comision': p['id_comision'],
-                'nombre': usuario.nombre if usuario else 'Desconocido',
-                'fecha': p['fecha'].strftime('%d/%m/%y'),
-                'estado': p['estado'],
-                'descripcion': p['descripcion']
-            })
+    def listar_comisiones_usuario(id_usuario):
+        conexion_db = ConexionBaseDatos()
+        if not conexion_db.conectar():
+            return []
+        
+        consulta = "SELECT c.id_comision, u.nombre, c.fecha, c.estado, c.descripcion FROM comisiones c JOIN usuarios u ON c.id_usuario = u.id_usuario WHERE c.id_usuario = %s ORDER BY c.fecha DESC"
+        resultado = conexion_db.ejecutar_consulta(consulta, (id_usuario,))
+        conexion_db.desconectar()
+        
         return resultado
 
-    @classmethod
-    def listar_comisiones_todos(cls):
-        resultado = []
-        for p in sorted(cls._comisiones, key=lambda x: x['fecha'], reverse=True):
-            usuario = Usuario.obtener_por_id(p['id_usuario'])
-            resultado.append({
-                'id_comision': p['id_comision'],
-                'nombre': usuario.nombre if usuario else 'Desconocido',
-                'fecha': p['fecha'].strftime('%d/%m/%y'),
-                'estado': p['estado'],
-                'descripcion': p['descripcion']
-            })
+    def listar_comisiones_todos():
+        conexion_db = ConexionBaseDatos()
+        if not conexion_db.conectar():
+            return []
+        
+        consulta = "SELECT c.id_comision, u.nombre, c.fecha, c.estado, c.descripcion FROM comisiones c JOIN usuarios u ON c.id_usuario = u.id_usuario ORDER BY c.fecha DESC"
+        resultado = conexion_db.ejecutar_consulta(consulta)
+        conexion_db.desconectar()
+        
         return resultado
 
-    @classmethod
-    def despachar_comision(cls, id_comision, id_usuario=None):
-        for comision in cls._comisiones:
-            if comision['id_comision'] == id_comision and (id_usuario is None or comision['id_usuario'] == id_usuario):
-                if comision['estado'] == 'Despachado':
-                    print("[WARN] Comisión ya despachada.")
-                    return False
-                comision['estado'] = 'Despachado'
-                return True
-        print("[WARN] Comisión no encontrada o sin permisos.")
-        return False
+    def despachar_comision(id_comision, id_usuario=None):
+        conexion_db = ConexionBaseDatos()
+        if not conexion_db.conectar():
+            return False
+        
+        if id_usuario:
+            consulta = "SELECT estado FROM comisiones WHERE id_comision = %s AND id_usuario = %s"
+            parametros = (id_comision, id_usuario)
+        else:
+            consulta = "SELECT estado FROM comisiones WHERE id_comision = %s"
+            parametros = (id_comision,)
+        
+        resultado = conexion_db.ejecutar_consulta(consulta, parametros)
+        
+        if not resultado:
+            print("Comisión no encontrada.")
+            conexion_db.desconectar()
+            return False
+        
+        estado_actual = resultado[0][0]
+        if estado_actual == 'Despachado':
+            print("Comisión ya despachada.")
+            conexion_db.desconectar()
+            return False
+        
+        consulta_actualizar = "UPDATE comisiones SET estado = 'Despachado' WHERE id_comision = %s"
+        
+        if conexion_db.ejecutar_consulta(consulta_actualizar, (id_comision,)):
+            conexion_db.desconectar()
+            return True
+        else:
+            conexion_db.desconectar()
+            return False
 
