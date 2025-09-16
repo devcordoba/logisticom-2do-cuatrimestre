@@ -7,7 +7,7 @@ from utils.utils import validar_contrasena
 def main():
     while True:
         login = Login()
-        print("\n=== Sistema de gestion de comisiones ===")
+        print("\n=== Sistema de gestion de comisiones - Logisticom ===")
         print("\n=== Iniciar sesion ===\n")
         email = input("Email: ")
         password = input("Contraseña: ")
