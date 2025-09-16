@@ -1,0 +1,7 @@
+.servicios-banner {
+  height: 35rem;
+  background-image: url("/img/Imagenes/representacion-de-la-cadena-de-suministro-bodegon.jpg");
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
