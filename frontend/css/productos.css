@@ -1,0 +1,7 @@
+.productos-banner {
+  height: 35rem;
+  background-image: url("/img/Imagenes/repartidor-de-tiro-medio-hablando-por-telefono.jpg");
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
