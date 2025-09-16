@@ -1,0 +1,52 @@
+/* Reset pequeño */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa; /* gris clarito */
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Hero personalizado */
+header {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: white;
+}
+
+header h1 {
+  font-weight: bold;
+}
+
+header p {
+  font-size: 1.4rem;
+}
+
+/* Navbar personalizado */
+.navbar-brand {
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 0;
+}
+
+.nav-item {
+  font-size: 1.2rem;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #4fc3f7 !important;
+}
+
+.navbar-logo {
+  width: 110px;
+}
+
+/* Cards de servicios */
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Footer */
+footer {
+  font-size: 0.9rem;
+}
