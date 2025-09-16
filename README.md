@@ -126,7 +126,7 @@ python main.py
 ---
 
 ## Tecnologías
-- Lenguajes/herramientas: XAMPP, Docker, LAMP
+- Lenguajes/herramientas: XAMPP, Python, Javascript, CSS, Docker
 - Base de datos: MySQL 
 - Control de versiones: GitHub  
 
