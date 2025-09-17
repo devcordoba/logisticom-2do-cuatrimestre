@@ -1,0 +1,53 @@
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+.carousel {
+  margin-bottom: 4rem;
+}
+
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+.carousel-item {
+  height: 35rem;
+}
+
+.carousel-item img {
+  filter: brightness(0.7);
+}
+
+.carousel-button {
+  background-color: #4FC3F7 ;
+  color: #fff;
+}
+
+.content-img {
+  background-color: #4FC3F7 ;
+  border: 5px solid #1174a1;
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-img img {
+  width: 150%;
+}
+
+.carousel-slide {
+  height:400px;
+}
+
+.carousel-slide img {
+  object-fit: cover;
+}
+
+footer i {
+  color: #4FC3F7;
+}
