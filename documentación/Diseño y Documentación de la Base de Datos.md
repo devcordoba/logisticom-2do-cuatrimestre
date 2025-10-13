@@ -12,14 +12,14 @@
 
 - `id_usuario`: Identificador único (INT, AUTO_INCREMENT, PK).
 - `nombre`: Nombre completo del usuario (VARCHAR(100), NOT NULL).
-- `email`: Dirección de correo (VARCHAR(100), NOT NULL).
+- `email`: Dirección de correo (VARCHAR(100), NOT NULL, UNIQUE).
 - `contrasena`: Hash de la contraseña SHA-256 (VARCHAR(64), NOT NULL).
 - `id_rol`: Referencia al rol asignado (INT, FK, NOT NULL).
 
 ### *Roles*
 
 - `id_rol`: Clave primaria (INT, AUTO_INCREMENT, PK).
-- `nombre`: Nombre del rol (VARCHAR(50), NOT NULL).
+- `nombre`: Nombre del rol (VARCHAR(50), NOT NULL, UNIQUE).
 
 ### *Comisiones*
 
@@ -55,13 +55,13 @@ El modelo fue normalizado hasta **Tercera Forma Normal (3FN)** para evitar redun
 erDiagram
     ROLES {
         int id_rol PK "AUTO_INCREMENT"
-        varchar nombre "NOT NULL"
+        varchar nombre "NOT NULL, UNIQUE"
     }
 
     USUARIOS {
         int id_usuario PK "AUTO_INCREMENT"
         varchar nombre "NOT NULL"
-        varchar email "NOT NULL"
+        varchar email "NOT NULL, UNIQUE"
         varchar contrasena "NOT NULL, SHA-256"
         int id_rol FK "NOT NULL"
     }
@@ -99,13 +99,7 @@ classDiagram
         -nombre: str
         -email: str
         -rol: str
-        -pass: str
-        +registrar_usuario(nombre, email, rol, pass) bool
-        +listar_todos() list
-        +obtener_por_email(email) Usuario
-        +obtener_por_id(id_usuario) Usuario
-        +cambiar_rol(id_usuario, rol_nuevo) bool
-        +eliminar_usuario(id_usuario) bool
+        -password: str
     }
 
     class Login {
@@ -116,13 +110,6 @@ classDiagram
         +cambiar_nombre(nombre_nuevo) bool
     }
 
-    class Comision {
-        +ingresar_comision(id_usuario, descripcion) bool
-        +listar_comisiones_usuario(id_usuario) list
-        +listar_comisiones_todos() list
-        +despachar_comision(id_comision, id_usuario) bool
-    }
-
     class Menu {
         -login: Login
         +cambiar_rol_usuario() void
@@ -131,23 +118,88 @@ classDiagram
         +ver_menu() void
     }
 
+    class ServicioAutenticacion {
+        +iniciar_sesion(email, password) Usuario
+        +cambiar_contrasena(id_usuario, pass_actual, pass_nueva) bool
+        +cambiar_nombre(id_usuario, nombre_nuevo) bool
+    }
+
+    class ServicioUsuario {
+        +registrar_usuario(nombre, email, rol, password) bool
+        +listar_todos() list
+        +cambiar_rol(id_usuario, rol_nuevo) bool
+        +eliminar_usuario(id_usuario) bool
+    }
+
+    class ServicioComision {
+        +crear_comision(id_usuario, descripcion) bool
+        +listar_comisiones_usuario(id_usuario) list
+        +listar_todas() list
+        +despachar_comision(id_comision) bool
+    }
+
+    class RepositorioUsuario {
+        +obtener_por_email(email) tuple
+        +obtener_por_id(id_usuario) tuple
+        +listar_todos_con_roles() list
+        +insertar_usuario(nombre, email, hash, id_rol) bool
+        +actualizar_rol(id_usuario, id_rol) bool
+        +actualizar_nombre(id_usuario, nombre) bool
+        +actualizar_contrasena(id_usuario, hash) bool
+        +eliminar_usuario(id_usuario) bool
+    }
+
+    class RepositorioRol {
+        +obtener_id_por_nombre(rol) int
+        +listar_roles() list
+    }
+
+    class RepositorioComision {
+        +insertar(id_usuario, descripcion) bool
+        +listar_por_id_usuario(id_usuario) list
+        +listar_todas_con_usuario() list
+        +obtener_estado_por_id(id_comision) str
+        +marcar_despachado(id_comision) bool
+    }
+
     class Utils {
         +validar_contrasena(password) bool
         +encriptar_contrasena(passwd) str
     }
 
-    %% Relaciones
-    Usuario --> ConexionBaseDatos : usa
-    Login --> Usuario : contiene
-    Login --> ConexionBaseDatos : usa
-    Comision --> ConexionBaseDatos : usa
-    Menu --> Usuario : usa
+    %% Relaciones (capa a capa)
     Menu --> Login : contiene
-    Menu --> Comision : usa
-    Menu --> Utils : usa
-    Usuario --> Utils : usa
-    Login --> Utils : usa
+    Menu --> ServicioUsuario : usa
+    Menu --> ServicioComision : usa
+    Login --> ServicioAutenticacion : usa
+
+    ServicioAutenticacion --> RepositorioUsuario : usa
+    ServicioUsuario --> RepositorioUsuario : usa
+    ServicioUsuario --> RepositorioRol : usa
+    ServicioUsuario --> RepositorioComision : valida/elimina
+    ServicioComision --> RepositorioComision : usa
+
+    RepositorioUsuario --> ConexionBaseDatos : usa
+    RepositorioRol --> ConexionBaseDatos : usa
+    RepositorioComision --> ConexionBaseDatos : usa
+
+    ServicioAutenticacion --> Utils : usa
+    ServicioUsuario --> Utils : usa
 ```
+
+## Casos de Uso (resumen)
+
+- Iniciar sesión: Usuario ingresa credenciales, sistema valida hash y habilita menú.
+- Cambiar nombre: Usuario autenticado actualiza su nombre.
+- Cambiar contraseña: Usuario autenticado valida contraseña actual, política y actualiza hash.
+- Registrar usuario: Admin crea usuario con rol, valida email único y encripta contraseña.
+- Ver usuarios: Admin lista usuarios con roles (JOIN).
+- Cambiar rol: Admin cambia rol validando rol existente.
+- Eliminar usuario: Admin elimina si no tiene comisiones asociadas.
+- Ingresar comisión: Usuario crea comisión en estado Pendiente con fecha actual.
+- Ver mis comisiones: Usuario lista las propias (JOIN con usuarios).
+- Ver todas las comisiones: Admin lista todas (JOIN con usuarios).
+- Despachar comisión: Admin cambia estado a Despachado verificando estado previo.
 
 ## Consideraciones de Diseño
 
