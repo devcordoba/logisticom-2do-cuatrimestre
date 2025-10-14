@@ -1,7 +1,7 @@
 from models.login import Login
 from menu.menu import Menu
-from models.comision import Comision
-from models.usuario import Usuario
+from servicios.servicio_comision import ServicioComision
+from servicios.servicio_usuario import ServicioUsuario
 from utils.utils import validar_contrasena
 
 def main():
@@ -23,12 +23,14 @@ def main():
                     break
                 elif opcion == '1':
                     descripcion = input("\nDescripcion de la comision: ")
-                    if Comision.ingresar_comision(login.usuario_actual.id_usuario, descripcion):
+                    serv_com = ServicioComision()
+                    if serv_com.crear_comision(login.usuario_actual.id_usuario, descripcion):
                         print("\nComision ingresada.")
                     else:
                         print("Error.")
                 elif opcion == '2':
-                    comisiones = Comision.listar_comisiones_usuario(login.usuario_actual.id_usuario)
+                    serv_com = ServicioComision()
+                    comisiones = serv_com.listar_comisiones_usuario(login.usuario_actual.id_usuario)
                     if comisiones:
                         print("\n=== Mis Comisiones ===")
                         for i, comision in enumerate(comisiones, start=1):
@@ -68,7 +70,8 @@ def main():
                         print("Opcion no valida.")
                 elif opcion == '6':
                     if login.usuario_actual.rol == 'admin':
-                        todas_comisiones = Comision.listar_comisiones_todos()
+                        serv_com = ServicioComision()
+                        todas_comisiones = serv_com.listar_todas()
                         if todas_comisiones:
                             print("\n=== Todas las Comisiones ===")
                             for i, comision in enumerate(todas_comisiones):
@@ -82,7 +85,8 @@ def main():
                     if login.usuario_actual.rol == 'admin':
                         try:
                             id_comision_despachar = int(input("\nID de la comision a despachar: "))
-                            if Comision.despachar_comision(id_comision_despachar):
+                            serv_com = ServicioComision()
+                            if serv_com.despachar_comision(id_comision_despachar):
                                 print("\nDespachado correctamente.")
                             else:
                                 print("Error.")
@@ -92,7 +96,8 @@ def main():
                         print("Opcion no valida.")
                 elif opcion == '8':
                     if login.usuario_actual.rol == 'admin':
-                        usuarios = Usuario.listar_todos()
+                        serv_usr = ServicioUsuario()
+                        usuarios = serv_usr.listar_todos()
                         if usuarios:
                             print("\n=== Lista de usuarios ===")
                             for i, usuario in enumerate(usuarios, start=1):
