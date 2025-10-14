@@ -1,16 +1,18 @@
-from models.usuario import Usuario
 from models.login import Login
-from models.comision import Comision
 from utils.utils import validar_contrasena
+from servicios.servicio_usuario import ServicioUsuario
+from servicios.servicio_comision import ServicioComision
 
 class Menu:
     def __init__(self, login):
         self.login = login
+        self.servicio_usuario = ServicioUsuario()
+        self.servicio_comision = ServicioComision()
 
     def cambiar_rol_usuario(self):
         print("\nCambiar rol de usuario")
         email_usuario = input("Email del usuario a modificar: ")
-        usuario_encontrado = Usuario.obtener_por_email(email_usuario)
+        usuario_encontrado = self.servicio_usuario.encontrar_usuario_por_email(email_usuario)
         if not usuario_encontrado:
             print("Usuario no encontrado.")
             return
@@ -21,7 +23,8 @@ class Menu:
                 break
             print("Rol invalido. Intente de nuevo.")
 
-        if Usuario.cambiar_rol(usuario_encontrado.id_usuario, rol_nuevo):
+        id_usuario = usuario_encontrado[0] if isinstance(usuario_encontrado, tuple) else usuario_encontrado.id_usuario
+        if self.servicio_usuario.cambiar_rol(id_usuario, rol_nuevo):
             print("Rol cambiado correctamente.")
         else:
             print("Error al cambiar rol.")
@@ -29,17 +32,20 @@ class Menu:
     def eliminar_usuario(self):
         print("\nEliminar usuario")
         email_usuario = input("Email del usuario a eliminar: ")
-        usuario_encontrado = Usuario.obtener_por_email(email_usuario)
+        usuario_encontrado = self.servicio_usuario.encontrar_usuario_por_email(email_usuario)
         if not usuario_encontrado:
             print("Usuario no encontrado.")
             return
 
+        nombre = usuario_encontrado[1] if isinstance(usuario_encontrado, tuple) else usuario_encontrado.nombre
+        email = usuario_encontrado[2] if isinstance(usuario_encontrado, tuple) else usuario_encontrado.email
         confirmacion = input(
-            f"Seguro que desea eliminar al usuario {usuario_encontrado.nombre} "
-            f"({usuario_encontrado.email})? (s/n): "
+            f"Seguro que desea eliminar al usuario {nombre} (" 
+            f"{email})? (s/n): "
         )
         if confirmacion.lower() == 's':
-            if Usuario.eliminar_usuario(usuario_encontrado.id_usuario):
+            id_usuario = usuario_encontrado[0] if isinstance(usuario_encontrado, tuple) else usuario_encontrado.id_usuario
+            if self.servicio_usuario.eliminar_usuario(id_usuario):
                 print("Usuario eliminado correctamente.")
             else:
                 print("Error al eliminar usuario.")
@@ -70,7 +76,7 @@ class Menu:
 
             break
 
-        if Usuario.registrar_usuario(nombre_usuario, email_usuario, rol_usuario, pass_inicial):
+        if self.servicio_usuario.registrar_usuario(nombre_usuario, email_usuario, rol_usuario, pass_inicial):
             print("Usuario registrado correctamente.")
         else:
             print("Error al registrar usuario.")
