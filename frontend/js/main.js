@@ -1,45 +1,45 @@
 // login
-
 const USER = "usuario@mail.com";
 const PASSWORD = "123456";
 
-const loginForm = document.getElementById("loginForm");
-
-loginForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("passwordInput").value;
-
-  if (email === USER && password === PASSWORD) {
-    alert("Login exitoso");
-    window.location.href = "index.html";
-  } else {
-    alert("Usuario o contraseña incorrectos");
-  }
-});
-
-// registro
-
+// Espera a que el DOM cargue antes de buscar elementos
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("registerForm");
+  const loginForm = document.getElementById("loginForm");
 
-  form.addEventListener("submit", function (event) {
+  loginForm?.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const nombre = document.getElementById("nombre").value.trim();
-    const apellido = document.getElementById("apellido").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const passwordConfirm = document.getElementById("passwordConfirm").value;
+    // Obtiene los valores de manera segura
+    const email = document.getElementById("email")?.value.trim() || "";
+    const password = document.getElementById("passwordInput")?.value || "";
 
-    if (password !== passwordConfirm) {
-      alert("Las contraseñas no coinciden. Por favor, verifica.");
-      return;
+    if (email === USER && password === PASSWORD) {
+      alert("Login exitoso");
+      window.location.href = "index.html";
+    } else {
+      alert("Usuario o contraseña incorrectos");
     }
+  });
+
+  // registro
+  const registerForm = document.getElementById("registerForm");
+
+  registerForm?.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const nombre = document.getElementById("nombre")?.value.trim() || "";
+    const apellido = document.getElementById("apellido")?.value.trim() || "";
+    const email = document.getElementById("email")?.value.trim() || "";
+    const password = document.getElementById("password")?.value || "";
+    const passwordConfirm = document.getElementById("passwordConfirm")?.value || "";
 
     if (!nombre || !apellido || !email || !password) {
       alert("Por favor, completa todos los campos obligatorios.");
+      return;
+    }
+
+    if (password !== passwordConfirm) {
+      alert("Las contraseñas no coinciden. Por favor, verifica.");
       return;
     }
 
