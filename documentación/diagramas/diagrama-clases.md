@@ -18,13 +18,7 @@ classDiagram
         -nombre: str
         -email: str
         -rol: str
-        -pass: str
-        +registrar_usuario(nombre, email, rol, pass) bool
-        +listar_todos() list
-        +obtener_por_email(email) Usuario
-        +obtener_por_id(id_usuario) Usuario
-        +cambiar_rol(id_usuario, rol_nuevo) bool
-        +eliminar_usuario(id_usuario) bool
+        -password: str
     }
 
     class Login {
@@ -35,13 +29,6 @@ classDiagram
         +cambiar_nombre(nombre_nuevo) bool
     }
 
-    class Comision {
-        +ingresar_comision(id_usuario, descripcion) bool
-        +listar_comisiones_usuario(id_usuario) list
-        +listar_comisiones_todos() list
-        +despachar_comision(id_comision, id_usuario) bool
-    }
-
     class Menu {
         -login: Login
         +cambiar_rol_usuario() void
@@ -50,20 +37,71 @@ classDiagram
         +ver_menu() void
     }
 
+    class ServicioAutenticacion {
+        +iniciar_sesion(email, password) Usuario
+        +cambiar_contrasena(id_usuario, pass_actual, pass_nueva) bool
+        +cambiar_nombre(id_usuario, nombre_nuevo) bool
+    }
+
+    class ServicioUsuario {
+        +registrar_usuario(nombre, email, rol, password) bool
+        +listar_todos() list
+        +cambiar_rol(id_usuario, rol_nuevo) bool
+        +eliminar_usuario(id_usuario) bool
+    }
+
+    class ServicioComision {
+        +crear_comision(id_usuario, descripcion) bool
+        +listar_comisiones_usuario(id_usuario) list
+        +listar_todas() list
+        +despachar_comision(id_comision) bool
+    }
+
+    class RepositorioUsuario {
+        +obtener_por_email(email) tuple
+        +obtener_por_id(id_usuario) tuple
+        +listar_todos_con_roles() list
+        +insertar_usuario(nombre, email, hash, id_rol) bool
+        +actualizar_rol(id_usuario, id_rol) bool
+        +actualizar_nombre(id_usuario, nombre) bool
+        +actualizar_contrasena(id_usuario, hash) bool
+        +eliminar_usuario(id_usuario) bool
+    }
+
+    class RepositorioRol {
+        +obtener_id_por_nombre(rol) int
+        +listar_roles() list
+    }
+
+    class RepositorioComision {
+        +insertar(id_usuario, descripcion) bool
+        +listar_por_id_usuario(id_usuario) list
+        +listar_todas_con_usuario() list
+        +obtener_estado_por_id(id_comision) str
+        +marcar_despachado(id_comision) bool
+    }
+
     class Utils {
         +validar_contrasena(password) bool
         +encriptar_contrasena(passwd) str
     }
 
-    %% Relaciones
-    Usuario --> ConexionBaseDatos : usa
-    Login --> Usuario : contiene
-    Login --> ConexionBaseDatos : usa
-    Comision --> ConexionBaseDatos : usa
-    Menu --> Usuario : usa
+    %% Relaciones (capa a capa)
     Menu --> Login : contiene
-    Menu --> Comision : usa
-    Menu --> Utils : usa
-    Usuario --> Utils : usa
-    Login --> Utils : usa
+    Menu --> ServicioUsuario : usa
+    Menu --> ServicioComision : usa
+    Login --> ServicioAutenticacion : usa
+
+    ServicioAutenticacion --> RepositorioUsuario : usa
+    ServicioUsuario --> RepositorioUsuario : usa
+    ServicioUsuario --> RepositorioRol : usa
+    ServicioUsuario --> RepositorioComision : valida/elimina
+    ServicioComision --> RepositorioComision : usa
+
+    RepositorioUsuario --> ConexionBaseDatos : usa
+    RepositorioRol --> ConexionBaseDatos : usa
+    RepositorioComision --> ConexionBaseDatos : usa
+
+    ServicioAutenticacion --> Utils : usa
+    ServicioUsuario --> Utils : usa
 ```

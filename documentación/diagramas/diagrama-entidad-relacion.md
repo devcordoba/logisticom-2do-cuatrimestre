@@ -4,13 +4,13 @@
 erDiagram
     ROLES {
         int id_rol PK "AUTO_INCREMENT"
-        varchar nombre "NOT NULL"
+        varchar nombre "NOT NULL, UNIQUE"
     }
 
     USUARIOS {
         int id_usuario PK "AUTO_INCREMENT"
         varchar nombre "NOT NULL"
-        varchar email "NOT NULL"
+        varchar email "NOT NULL, UNIQUE"
         varchar contrasena "NOT NULL, SHA-256"
         int id_rol FK "NOT NULL"
     }
