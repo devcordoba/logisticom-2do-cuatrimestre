@@ -1,53 +1,47 @@
 from models.usuario import Usuario
-from database.conexion import ConexionBaseDatos
 from utils.utils import encriptar_contrasena
+from servicios.servicio_autenticacion import ServicioAutenticacion
+from servicios.servicio_usuario import ServicioUsuario
 
 class Login:
     def __init__(self):
         self.usuario_actual = None
         self.password_hash = None
+        self.autenticacion = ServicioAutenticacion()
+        self.servicio_usuario = ServicioUsuario()
 
     def inicio_de_sesion(self, email, password):
-        usuario = Usuario.obtener_por_email(email)
-        if usuario:
-            password_enc = encriptar_contrasena(password)
-            if password_enc == usuario.password:
-                self.usuario_actual = usuario
-                self.password_hash = password_enc
-                return True
-        return False
+        usuario = self.autenticacion.iniciar_sesion(email, password)
+        if not usuario:
+            return False
+        self.usuario_actual = usuario
+        self.password_hash = usuario.password
+        return True
 
     def cambiar_pass(self, pass_actual, pass_nueva):
-        if encriptar_contrasena(pass_actual) == self.password_hash:
-            pass_nueva_encriptada = encriptar_contrasena(pass_nueva)
-            
-            conexion_db = ConexionBaseDatos()
-            if not conexion_db.conectar():
-                return False
-            
-            consulta = "UPDATE usuarios SET contrasena = %s WHERE id_usuario = %s"
-            if conexion_db.ejecutar_consulta(consulta, (pass_nueva_encriptada, self.usuario_actual.id_usuario)):
-                self.usuario_actual.password = pass_nueva_encriptada
-                self.password_hash = pass_nueva_encriptada
-                conexion_db.desconectar()
-                return True
-            else:
-                conexion_db.desconectar()
-                return False
-        else:
+        if not self.usuario_actual:
             return False
+        ok = self.autenticacion.cambiar_contrasena(self.usuario_actual.id_usuario, pass_actual, pass_nueva)
+        if ok:
+            fila = self.servicio_usuario.encontrar_usuario_por_email(self.usuario_actual.email)
+            if fila:
+                id_usuario, nombre, email_usuario, hash_pass, rol = fila
+                self.usuario_actual = Usuario(id_usuario, nombre, email_usuario, rol, hash_pass)
+                self.password_hash = hash_pass
+            else:
+                self.password_hash = encriptar_contrasena(pass_nueva)
+            return True
+        return False
 
     def cambiar_nombre(self, nombre_nuevo):
-        conexion_db = ConexionBaseDatos()
-        if not conexion_db.conectar():
+        if not self.usuario_actual:
             return False
-        
-        consulta = "UPDATE usuarios SET nombre = %s WHERE id_usuario = %s"
-        if conexion_db.ejecutar_consulta(consulta, (nombre_nuevo, self.usuario_actual.id_usuario)):
-            self.usuario_actual.nombre = nombre_nuevo
-            conexion_db.desconectar()
+        ok = self.autenticacion.cambiar_nombre(self.usuario_actual.id_usuario, nombre_nuevo)
+        if ok:
+            fila = self.servicio_usuario.encontrar_usuario_por_email(self.usuario_actual.email)
+            if fila:
+                id_usuario, nombre, email_usuario, hash_pass, rol = fila
+                self.usuario_actual = Usuario(id_usuario, nombre, email_usuario, rol, hash_pass)
             return True
-        else:
-            conexion_db.desconectar()
-            return False
+        return False
 
