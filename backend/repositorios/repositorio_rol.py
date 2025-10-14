@@ -1,9 +1,8 @@
-from typing import Optional
 from database.conexion import ConexionBaseDatos
 
 
 class RepositorioRol:
-    def obtener_id_por_nombre(self, rol: str) -> Optional[int]:
+    def obtener_id_por_nombre(self, rol):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return None

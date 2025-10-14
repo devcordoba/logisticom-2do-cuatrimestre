@@ -1,10 +1,9 @@
-from typing import List, Optional, Tuple
 import datetime
 from database.conexion import ConexionBaseDatos
 
 
 class RepositorioComision:
-    def insertar(self, id_usuario: int, descripcion: str) -> bool:
+    def insertar(self, id_usuario, descripcion):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return False
@@ -16,7 +15,7 @@ class RepositorioComision:
         conexion_db.desconectar()
         return bool(ok)
 
-    def listar_por_id_usuario(self, id_usuario: int) -> List[Tuple]:
+    def listar_por_id_usuario(self, id_usuario):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return []
@@ -29,7 +28,7 @@ class RepositorioComision:
         conexion_db.desconectar()
         return resultado or []
 
-    def listar_todas_con_usuario(self) -> List[Tuple]:
+    def listar_todas_con_usuario(self):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return []
@@ -41,7 +40,7 @@ class RepositorioComision:
         conexion_db.desconectar()
         return resultado or []
 
-    def obtener_estado_por_id(self, id_comision: int) -> Optional[str]:
+    def obtener_estado_por_id(self, id_comision):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return None
@@ -52,7 +51,7 @@ class RepositorioComision:
             return str(resultado[0][0])
         return None
 
-    def marcar_despachado(self, id_comision: int) -> bool:
+    def marcar_despachado(self, id_comision):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return False
@@ -61,7 +60,7 @@ class RepositorioComision:
         conexion_db.desconectar()
         return bool(ok)
 
-    def tiene_comisiones_de_usuario(self, id_usuario: int) -> bool:
+    def tiene_comisiones_de_usuario(self, id_usuario):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return False

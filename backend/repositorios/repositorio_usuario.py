@@ -1,9 +1,8 @@
-from typing import List, Optional, Tuple
 from database.conexion import ConexionBaseDatos
 
 
 class RepositorioUsuario:
-    def obtener_por_email(self, email: str) -> Optional[Tuple]:
+    def obtener_por_email(self, email):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return None
@@ -15,7 +14,7 @@ class RepositorioUsuario:
         conexion_db.desconectar()
         return resultado[0] if resultado else None
 
-    def obtener_por_id(self, id_usuario: int) -> Optional[Tuple]:
+    def obtener_por_id(self, id_usuario):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return None
@@ -27,7 +26,7 @@ class RepositorioUsuario:
         conexion_db.desconectar()
         return resultado[0] if resultado else None
 
-    def listar_todos_con_roles(self) -> List[Tuple]:
+    def listar_todos_con_roles(self):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return []
@@ -39,7 +38,7 @@ class RepositorioUsuario:
         conexion_db.desconectar()
         return resultado or []
 
-    def existe_email(self, email: str) -> bool:
+    def existe_email(self, email):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return False
@@ -48,7 +47,7 @@ class RepositorioUsuario:
         conexion_db.desconectar()
         return bool(resultado)
 
-    def insertar_usuario(self, nombre: str, email: str, hash_pass: str, id_rol: int) -> bool:
+    def insertar_usuario(self, nombre, email, hash_pass, id_rol):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return False
@@ -59,7 +58,7 @@ class RepositorioUsuario:
         conexion_db.desconectar()
         return bool(ok)
 
-    def actualizar_rol(self, id_usuario: int, id_rol: int) -> bool:
+    def actualizar_rol(self, id_usuario, id_rol):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return False
@@ -68,7 +67,7 @@ class RepositorioUsuario:
         conexion_db.desconectar()
         return bool(ok)
 
-    def actualizar_nombre(self, id_usuario: int, nombre_nuevo: str) -> bool:
+    def actualizar_nombre(self, id_usuario, nombre_nuevo):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return False
@@ -77,7 +76,7 @@ class RepositorioUsuario:
         conexion_db.desconectar()
         return bool(ok)
 
-    def actualizar_contrasena(self, id_usuario: int, hash_pass: str) -> bool:
+    def actualizar_contrasena(self, id_usuario, hash_pass):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return False
@@ -86,7 +85,7 @@ class RepositorioUsuario:
         conexion_db.desconectar()
         return bool(ok)
 
-    def eliminar_usuario(self, id_usuario: int) -> bool:
+    def eliminar_usuario(self, id_usuario):
         conexion_db = ConexionBaseDatos()
         if not conexion_db.conectar():
             return False
