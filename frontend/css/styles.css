@@ -125,7 +125,7 @@ footer i {
 
 .nosotros-banner {
   height: 30rem;
-  background-image: url("/img/Imagenes/repartidor-cargando.webp");
+  background-image: url("../img/Imagenes/repartidor-cargando.webp");
   background-position: center;
   background-size: cover;
   overflow: hidden;
@@ -152,7 +152,7 @@ footer i {
 
 .servicios-banner {
   height: 30rem;
-  background-image: url("/img/Imagenes/vehiculos.webp");
+  background-image: url("../img/Imagenes/vehiculos.webp");
   background-position: center;
   background-size: cover;
   overflow: hidden;
@@ -171,7 +171,7 @@ footer i {
 
 .productos-banner {
   height: 30rem;
-  background-image: url("/img/Imagenes/repartidor-celular.webp");
+  background-image: url("../img/Imagenes/repartidor-celular.webp");
   background-position: center;
   background-size: cover;
   overflow: hidden;
@@ -204,7 +204,7 @@ footer i {
 
 .contacto-banner {
   height: 30rem;
-  background-image: url("/img/Imagenes/contacto.webp");
+  background-image: url("../img/Imagenes/contacto.webp");
   background-position: center;
   background-size: cover;
   overflow: hidden;
@@ -430,7 +430,7 @@ footer i {
 }
 
 .login-img {
-  background-image: url(/img/Imagenes/repartidores-cajas.webp);
+  background-image: url('../img/Imagenes/repartidores-cajas.webp');
   background-position: center;
   background-size: cover;
   position: relative;
