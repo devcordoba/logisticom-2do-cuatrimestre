@@ -1,12 +1,14 @@
 /* Reset pequeño */
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa; /* gris clarito */
+  background-color: #f8f9fa;
   color: #333;
   line-height: 1.6;
 }
 
 /* Hero personalizado */
+
 header {
   background: linear-gradient(135deg, #0d6efd, #6610f2);
   color: white;
@@ -21,6 +23,7 @@ header p {
 }
 
 /* Navbar personalizado */
+
 .navbar-brand {
   font-weight: bold;
   letter-spacing: 1px;
@@ -40,13 +43,663 @@ header p {
   width: 110px;
 }
 
-/* Cards de servicios */
+.nav-login {
+  font-size: 15px;
+  margin-top: 3.5px;
+  margin-right: -15rem;
+  margin-left: 5rem;
+}
+
+.nav-login i {
+  color: #4FC3F7;
+  margin-top: 1px;
+}
+
+@media (max-width: 768px) {
+  .nav-login {
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
+
+/* Footer */
+
+footer {
+  font-size: 0.9rem;
+}
+
+footer i {
+  color: #4FC3F7;
+}
+
+/* Home */
+
+.carousel {
+  margin-bottom: 4rem;
+}
+
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+.carousel-item {
+  height: 30rem;
+}
+
+.carousel-item img {
+  filter: brightness(0.7);
+}
+
+.carousel-button {
+  background-color: #4FC3F7;
+  color: #fff;
+}
+
+.content-img {
+  background-color: #4FC3F7;
+  border: 5px solid #1174a1;
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-img img {
+  width: 150%;
+}
+
+.carousel-slide {
+  height: 30rem;
+}
+
+.carousel-slide img {
+  object-fit: cover;
+}
+
+/* Nosotros */
+
+.nosotros-banner {
+  height: 30rem;
+  background-image: url("../img/Imagenes/repartidor-cargando.webp");
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  min-height: 25rem;
+}
+
+.gallery-item {
+  aspect-ratio: 1 / 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Servicios */
+
+.servicios-banner {
+  height: 30rem;
+  background-image: url("../img/Imagenes/vehiculos.webp");
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.productos-banner p {
+  font-size: 1.2rem;
+}
+
 .card img {
   height: 200px;
   object-fit: cover;
 }
 
-/* Footer */
-footer {
-  font-size: 0.9rem;
+/* Productos */
+
+.productos-banner {
+  height: 30rem;
+  background-image: url("../img/Imagenes/repartidor-celular.webp");
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  min-height: 25rem;
+}
+
+.productos-banner p {
+  font-size: 1.2rem;
+}
+
+.album .col {
+  height: 500px;
+}
+
+.album .col .img-card {
+  height: 225px;
+  object-fit: cover;
+}
+
+.album .col button {
+  background: #4FC3F7;
+  color: white;
+}
+
+#descCargasGenerales {
+  font-size: 0.95rem;
+}
+
+/* Contacto */
+
+.contacto-banner {
+  height: 30rem;
+  background-image: url("../img/Imagenes/contacto.webp");
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  min-height: 25rem;
+}
+
+.tarjeta-datos {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 2px solid #4FC3F7;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-datos {
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  border-bottom: 2px solid #4FC3F7;
+  padding-bottom: 0.5rem;
+}
+
+.item-datos {
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: 2px solid #4FC3F7;
+}
+
+.icono-datos {
+  font-size: 1.5rem;
+  color: #4FC3F7;
+  margin-right: 1rem;
+}
+
+.redes-sociales {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e9ecef;
+}
+
+.red-social {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.red-social.facebook {
+  background-color: #1877f2;
+}
+
+.red-social.instagram {
+  background-color: #e4405f;
+}
+
+.red-social.whatsapp {
+  background-color: #25d366;
+}
+
+.red-social.linkedin {
+  background-color: #0077b5;
+}
+
+.tarjeta-formulario {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 2px solid #4FC3F7;
+  height: 100%;
+}
+
+.datos-compactos {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 2px solid #4FC3F7;
+  height: 100%;
+}
+
+.titulo-compacto {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  border-bottom: 2px solid #4FC3F7;
+  padding-bottom: 0.5rem;
+  text-align: center;
+}
+
+.item-compacto {
+  background-color: white;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #4FC3F7;
+}
+
+.icono-compacto {
+  font-size: 1.2rem;
+  color: #4FC3F7;
+  margin-right: 0.8rem;
+}
+
+.redes-compactas {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid #e9ecef;
+  text-align: center;
+}
+
+.red-compacta {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.red-compacta.facebook {
+  background-color: #1877f2;
+}
+
+.red-compacta.instagram {
+  background-color: #e4405f;
+}
+
+.red-compacta.whatsapp {
+  background-color: #25d366;
+}
+
+.red-compacta.linkedin {
+  background-color: #0077b5;
+}
+
+.boton-enviar {
+  background-color: #4FC3F7;
+  border: none;
+}
+
+.boton-enviar:hover {
+  background-color: #4FC3F7;
+}
+
+/* Login */
+
+.login-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.login-form {
+  width: 970px;
+  height: 570px;
+  border-radius: 1rem;
+  border: 1px solid hsla(220, 20%, 25%, 0.6);
+  background-color: #212529;
+  box-shadow: rgba(9, 11, 17, 0.5) 0px 5px 15px 0px, rgba(19, 23, 32, 0.08) 0px 15px 35px -5px;
+  display: flex;
+}
+
+.login-text {
+  width: 50%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.login-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: bold;
+}
+
+.login-head h4 {
+  font-weight: 400;
+  font-size: 35px !important;
+  margin-left: 0rem;
+  margin-bottom: -1rem;
+}
+
+.login-body {
+  width: 100%;
+  height: 100%;
+  margin-top: 1rem;
+}
+
+.login-body p {
+  color: white !important;
+  font-weight: bold;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+}
+
+.login-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  height: 130px;
+}
+
+.login-img {
+  background-image: url('../img/Imagenes/repartidores-cajas.webp');
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 1rem;
+  width: 50%;
+  margin: 1rem;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 999;
+  color: #fff;
+}
+
+.input-pass {
+  width: 100%;
+  height: 38px;
+  background-color: rgb(42, 54, 85);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding-left: 1rem;
+  outline: none;
+  margin-top: 4px;
+}
+
+@media (max-width: 980px) {
+  .login-form {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 0rem;
+  }
+
+  .login-text {
+    width: 100%;
+    height: 83%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .login-img {
+    position: absolute;
+    bottom: -3%;
+    height: 27%;
+    width: 100%;
+    background: transparent !important;
+    margin: 0 !important;
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 375px) {
+  .login-head h4 {
+    font-weight: 400;
+    margin-left: 0rem;
+    margin-bottom: -1rem;
+  }
+
+  .login-text {
+    padding-top: 0 !important;
+  }
+
+  .login-img {
+    position: absolute;
+    bottom: -12%;
+    height: 37%;
+    width: 100%;
+    background: transparent !important;
+    margin: 0 !important;
+    transform: scale(0.5);
+  }
+}
+
+/* Registro */
+
+.register-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.register-form {
+  width: 970px;
+  height: 570px;
+  border-radius: 1rem;
+  border: 1px solid hsla(220, 20%, 25%, 0.6);
+  background-color: #212529;
+  box-shadow: rgba(9, 11, 17, 0.5) 0px 5px 15px 0px, rgba(19, 23, 32, 0.08) 0px 15px 35px -5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-text {
+  width: 50%;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 0rem;
+}
+
+.register-head {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  margin: 0.5rem 2rem;
+}
+
+.register-head h4 {
+  font-weight: 400;
+  margin-left: 0rem;
+  margin-bottom: 0rem;
+  font-size: 35px;
+  width: 20%;
+}
+
+.line-head {
+  width: 75%;
+  height: 5px;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #2c8cb9, #0288D1);
+}
+
+.register-estructure {
+  display: flex;
+  margin: 0 30px;
+}
+
+.register-body {
+  width: 100%;
+  height: 100%;
+  margin-top: 1rem;
+}
+
+.register-body p {
+  color: white !important;
+  font-weight: bold;
+}
+
+.register-content {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+}
+
+.register-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  width: 100%;
+  margin-top: 5.4rem;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 999;
+  color: #fff;
+}
+
+.input-pass {
+  width: 100%;
+  height: 38px;
+  background-color: rgb(42, 54, 85);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding-left: 1rem;
+  outline: none;
+  margin-top: 4px;
+}
+
+.modal-container {
+  background: linear-gradient(to top right, #43cea2, #185a9d);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.modal-form {
+  padding: 20px 0px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+@media (max-width: 980px) {
+  .register-form {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 0rem;
+  }
+
+  .register-text {
+    width: 100%;
+    height: 100%;
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .register-head {
+    flex-direction: column;
+    margin-top: -1.5rem;
+  }
+
+  .register-estructure {
+    flex-direction: column !important;
+  }
+
+  .register-head h4 {
+    font-weight: 400;
+    margin-top: -1rem;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .line-head {
+    width: 100%;
+    height: 5px;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    background: linear-gradient(to top right, #43cea2, #185a9d);
+  }
 }

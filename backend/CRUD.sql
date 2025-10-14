@@ -15,3 +15,26 @@ update usuarios set id_rol = 1 where id_usuario = 1;
 
 -- eliminar un usuario
 delete from usuarios where id_usuario = 1;
+
+-- =====================
+-- Operaciones de Comisiones
+-- =====================
+
+-- crear una comisión
+insert into comisiones (id_usuario, descripcion) values (2, 'Entrega de documentación');
+
+-- listar comisiones propias con JOIN
+select c.id_comision, u.nombre, c.fecha, c.estado, c.descripcion
+from comisiones c
+join usuarios u on c.id_usuario = u.id_usuario
+where c.id_usuario = 2
+order by c.fecha desc;
+
+-- listar todas las comisiones con JOIN
+select c.id_comision, u.nombre, c.fecha, c.estado, c.descripcion
+from comisiones c
+join usuarios u on c.id_usuario = u.id_usuario
+order by c.fecha desc;
+
+-- despachar una comisión
+update comisiones set estado = 'Despachado' where id_comision = 1;
